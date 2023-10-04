@@ -4,6 +4,7 @@ ENV HELM_SECRETS_VERSION=4.5.0
 ENV KUBECTL_VERSION=1.28.2
 ENV VALS_VERSION=0.27.1
 ENV SOPS_VERSION=3.7.3
+ENV AVP_VERSION=1.16.1
 
 RUN apk --no-cache add \
     curl \
@@ -15,4 +16,6 @@ RUN apk --no-cache add \
     && wget -qO /custom-tools/kubectl https://dl.k8s.io/release/v${KUBECTL_VERSION}/bin/linux/amd64/kubectl \
     && wget -qO- https://github.com/helmfile/vals/releases/download/v${VALS_VERSION}/vals_${VALS_VERSION}_linux_amd64.tar.gz | tar -xz -C /custom-tools/ vals \
     && cp /custom-tools/helm-plugins/helm-secrets/scripts/wrapper/helm.sh /custom-tools/helm \
+    && curl -L https://github.com/argoproj-labs/argocd-vault-plugin/releases/download/v${AVP_VERSION}/argocd-vault-plugin_${AVP_VERSION}_linux_amd64 -o argocd-vault-plugin \
+    && cp argocd-vault-plugin /custom-tools/argocd-vault-plugin \
     && chmod +x /custom-tools/*
