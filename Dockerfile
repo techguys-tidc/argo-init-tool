@@ -19,3 +19,5 @@ RUN apk --no-cache add \
     && curl -L https://github.com/argoproj-labs/argocd-vault-plugin/releases/download/v${AVP_VERSION}/argocd-vault-plugin_${AVP_VERSION}_linux_amd64 -o argocd-vault-plugin \
     && cp argocd-vault-plugin /tools/argocd-vault-plugin \
     && chmod +x /tools/*
+    
+RUN apk upgrade
